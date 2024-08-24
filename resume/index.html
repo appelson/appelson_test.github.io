@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Appelson's Custom Site</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #networkGraph {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .resume-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.resume-container h2 {
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.resume-container .project-container {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+    </style>
+</head>
+<body>
+    <svg id="networkGraph"></svg>
+    <header>
+        <div id="header-effect">Resume</div>
+    </header>
+    <img src="../images/eha.jpeg" alt="Elijah Appelson" class="profile-image">
+    <nav>
+        <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/media/">Media</a></li>
+        <li><a href="/blogs/">Blogs</a></li>
+        <li><a href="/resume/">Resume</a></li>
+    </ul>
+    </nav>
+    <main>
+        <div class="resume-container">
+            <section class="who am I">
+                <h2>WHO AM I?</h2>
+                <p> My name is Elijah Appelson, and I am a Mathematician and Activist based in the Catskill Mountains in rural New York. I graduated Phi Beta Kappa from Vassar College with a Bachelor's degree in Mathematics and Statistics. Currently, I serve as the Data Analyst at the ACLU of Louisiana, where I work to advance police and prison accountability and safeguard civil liberties by amplifying lived experiences and making data accessible to all stakeholders. Outside work, I am interested in graph theory, data privacy law, jewelry making, boxing, and reading.</p>
+            </section>
+            
+            <section class="education">
+                <h2>EDUCATION</h2>
+                <p><strong>Vassar College</strong> | Poughkeepsie, NY</p>
+                <p>Graduation May 2023</p>
+                <p>Bachelor of Arts in Pure Mathematics (Phi Beta Kappa / General Honors)</p>
+                <p>GPA: 4.00 / 4.00</p>
+            </section>
+
+            <section class="experience">
+                <h2>EXPERIENCE</h2>
+                <div class="job">
+    <h3>Data Analyst, American Civil Liberties Union (ACLU) of Louisiana</h3>
+    <p><strong>June 2023 - Current</strong></p>
+    <ul>
+        <li>First-ever data analyst at the ACLU of Louisiana, leading research and analysis initiatives to drive impactful legal and policy changes.</li>
+        <li>Developing large-scale dashboards to visualize the impact of police violence in Louisiana, utilizing predictive and geospatial modeling, and reaching 1,000,000+ Louisianians.</li>
+        <li>Launching 20+ reports on criminal legal reform, legislation, and legal statutes.</li>
+        <li>Leading research on top criminal justice lawsuits in collaboration with multiple law firms.</li>
+    </ul>
+</div>
+                <div class="job">
+                    <h3>Quantitative Tutor, Vassar College</h3>
+                    <p><strong>January 2021 - May 2023</strong></p>
+                    <ul>
+                        <li>Tutored 50+ students at Vassar College in various mathematics classes including Calculus, Statistics, Linear Algebra, Number Theory, Discrete Mathematics, Applied Mathematics, Real Analysis, Mathematical Cryptography, and Mathematical Logic.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Data Specialist, Center for Community Alternatives</h3>
+                    <p><strong>June 2021 - November 2022</strong></p>
+                    <ul>
+                        <li>Wrangled, cleaned, and merged data from 20,000+ members, supporters, and partners into a cohesive CRM.</li>
+                        <li>Developed various tools in Python to track pertinent media content and legislation efficiently.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Court Observation Intern, Vera Institute of Justice</h3>
+                    <p><strong>July 2022 - September 2022</strong></p>
+                    <ul>
+                        <li>Collected quantitative and qualitative data on over 100 defendants during their criminal court appearances.</li>
+                        <li>Attended meetings and maintained contact with Judges, Defense Attorneys, and District Attorneys.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Leader, End the New Jim Crow Action Network</h3>
+                    <p><strong>May 2020 - July 2022</strong></p>
+                    <ul>
+                        <li>Led the 50+ member community organization and managed dozens of volunteers in Court Watch of Dutchess County data collection program.</li>
+                        <li>Organized multiple rallies with 500+ participants.</li>
+                        <li>Developed an interactive database for residents to explore the collected court watch data.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Researcher, Consortium on Forced Migration, Displacement, and Eduction</h3>
+                    <p><strong>January 2021 - July 2021</strong></p>
+                    <ul>
+                        <li>Built the “Selective Bibliography on Forced Migration and Displacement” website as an educational tool for people interested in refugee studies.</li>
+                        <li>Wrote several bibliographies published on the website and in the EuropeNow journal.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="volunteer">
+                <h2>VOLUNTEERISM</h2>
+                <div class="job">
+                    <h3>BlueBonnet Data</h3>
+                    <p><strong>Tech Working Group Member, May 2024 - Now</strong></p>
+                    <ul>
+                        <li>Developing and implementing trainings on how data science can be used for progressive campaigns.</li>
+                        <li>Advise at least 3 project groups per cohort on their data strategy, research proposals, and reports for their campaign.</li>
+                    </ul>
+                    <p><strong>Data Fellow, May 2022 - August 2022</strong></p>
+                    <ul>
+                        <li>Worked with the Western Virginia Civic Engagement Table and For West Virginia's Future on voting rights data.</li>
+                        <li>Mapped the voting landscape of West Virginia using Python to automatically condense voter files and outside data into a cohesive data set.</li>
+                    </ul>
+                </div>
+                <div class="job">
+                    <h3>Vassar College</h3>
+                    <p><strong>LAVA Talk Host, January 2024</strong></p>
+                    <ul>
+                        <li>Gave a talk at Vassar College to introduce mathematics and statistics students to the impact of mathematics on progressive movements.</li>
+                    </ul>
+                    <p><strong>DataFest Judge, February 2024</strong></p>
+                    <ul>
+                        <li>Was invited to be one of 3 Judges for the 3-day Vassar College DataFest competition.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="honors">
+                <h2>HONORS</h2>
+                <ul>
+                    <li>Eleanor H. DeGolier Prize for Academic Excellence (2022): Received for having the highest academic standing during my Junior Year.</li>
+                    <li>Burnam Fellowship (2021): Received this fellowship to help change criminal justice in NYS with the Center for Community Alternatives.</li>
+                    <li>Vassar Community Fellowship (2020): One of ten students to receive the Community Fellowship to engage as a full-time employee at a non-profit located in the City of Poughkeepsie.</li>
+                    <li>State and Congressional Honor (2016): Received for volunteerism and community building through music.</li>
+                </ul>
+            </section>
+
+            <section class="skills">
+                <h2>SKILLS</h2>
+                <ul>
+                    <li><strong>Languages:</strong> Basic American Sign Language and Basic Spanish</li>
+                    <li><strong>Programming Languages:</strong> R (Shiny, Tidyverse, CARAT), Python (Selenium, Scikit, TensorFlow), CSS, HTML, and Basic SQL</li>
+                    <li><strong>Software:</strong> GitHub, Tableau, Power BI, ArcGIS, and Excel</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+   <footer>
+        <a href="https://www.linkedin.com/in/elijahappelson" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/appelson" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:elijahappelson@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </footer>
+    <script>
+        const targetText = "Resume";
+        const output = document.getElementById('header-effect');
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/";
+        let index = 0;
+        const delay = 100; // Adjust this value to slow down the effect
+
+        function getRandomChar() {
+            return chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        function updateHeader() {
+            let randomText = "";
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < index) {
+                    randomText += targetText[i];
+                } else {
+                    randomText += getRandomChar();
+                }
+            }
+            output.textContent = randomText;
+
+            if (index < targetText.length) {
+                index++;
+                setTimeout(updateHeader, delay);
+            }
+        }
+
+        updateHeader();
+    </script>
+    <script src="../Java/script2.js"></script>
+</body>
+</html>

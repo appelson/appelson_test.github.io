@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Appelson's Custom Site</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+       #networkGraph {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .resume-container {
+    max-width: 900px;
+    margin: auto;
+}
+        
+        main {
+            padding: 20px; /* Add padding around the main content */
+        }
+
+        .media-container {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 40px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .media-container:hover {
+            border-color: #0056b3;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            display: flex;
+            align-items: flex-start; /* Align items to the top */
+            justify-content: space-between; /* Space out description and image */
+        }
+
+        .project-description {
+            flex: 1; /* Allow the description to take up the available space */
+            max-width: 60%; /* Limit the width of the description */
+            margin-right: 20px; /* Space between description and image */
+        }
+
+        .project-description .description {
+            margin: 0;
+            color: #555;
+        }
+
+        .image-frame {
+            display: flex;
+            align-items: center; /* Center the image vertically */
+            justify-content: center; /* Center the image horizontally */
+            height: 250px; /* Fixed height for the frame */
+            background-color: white; /* Optional: background color to visualize the frame */
+            border-radius: 10px; /* Optional: rounded corners */
+        }
+
+        .project-image {
+            align-items: center; /* Center the image vertically */
+            height: 100%; /* Scale the image to fit the container height */
+            width: auto; /* Maintain aspect ratio */
+            object-fit: cover; /* Cover the container without distortion */
+            border-radius: 5px; /* Optional: rounded corners for the image */
+        }
+
+        .media-container .buttons {
+            margin-top: 20px; /* Space above the buttons */
+        }
+
+        .media-container .buttons a {
+            text-decoration: none;
+            color: #fff; /* Text color */
+            background-color: #0056b3; /* Button background color */
+            padding: 10px 20px; /* Button padding */
+            border-radius: 5px; /* Rounded corners */
+            margin-right: 10px; /* Space between buttons */
+            transition: background-color 0.3s, transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            font-size: 14px; /* Adjust font size */
+            font-weight: 600; /* Bold text */
+        }
+
+        .media-container .buttons a:hover {
+            background-color: #003d7a; /* Darker blue on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .buttons i {
+            margin-right: 8px; /* Space between icon and text */
+            font-size: 16px; /* Adjust icon size */
+        }
+
+        @media screen and (max-width: 600px) {
+            .image-frame {
+                display: none; /* Hide the image frame on small screens */
+            }
+
+            .project-description {
+                max-width: 100%; /* Allow the description to take full width on small screens */
+                margin-right: 0; /* Remove margin */
+            }
+        }
+          .section-bar {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.media-container {
+    position: relative; /* Ensure tags can be positioned absolutely */
+}
+
+.tags {
+    position: absolute;
+    bottom: -10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    display: flex;
+    gap: 5px; /* Space between tags */
+    flex-wrap: wrap; /* Allow tags to wrap if necessary */
+    justify-content: right; /* Center the navigation items */
+}
+
+.tag {
+    background-color: #ff6464; /* Tag background color */
+    color: white; /* Tag text color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px; /* Adjust size as needed */
+    font-size: 12px; /* Adjust font size as needed */
+    text-align: center; /* Center text in the tag */
+    white-space: nowrap; /* Prevent text from wrapping */
+    display: inline-block; /* Ensure tags do not stretch to fill container */
+}
+@media screen and (max-width: 800px) {
+    .section-bar {
+        color: white;
+    }
+    
+    .tags {
+        right: 10px; /* Adjust as needed */
+        bottom: -10px; /* Adjust as needed */
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .section-bar {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 10px; /* Space between buttons */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    justify-content: center; /* Center the navigation items */
+}
+
+.filter-buttons button {
+    background-color: #ff6464; /* Button background color */
+    color: white; /* Text color */
+    border: 1px solid white;
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Button padding */
+    font-size: 14px; /* Adjust font size */
+    font-weight: 600; /* Bold text */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.filter-buttons button:hover {
+    background-color: transparent; /* Darker blue on hover */
+    color: black;
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.filter-buttons button.selected {
+    background-color: #a83232; /* Darker color for the selected button */
+    color: white; /* Ensure text color contrasts with the darker background */
+}
+
+        
+    </style>
+</head>
+<body>
+    <svg id="networkGraph"></svg>
+    <header>
+        <div id="header-effect">Features</div>
+    </header>
+    <img src="eha.jpeg" alt="Elijah Appelson" class="profile-image">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+    
+    
+    <main>
+      
+      <div class="resume-container">
+      <h2 class="section-bar">
+        Filter Projects
+        <div class="filter-buttons">
+          <button onclick="filterProjects('')">Show All</button>
+            <button onclick="filterProjects('Scraping')">Scraping</button>
+            <button onclick="filterProjects('Visualization')">Visualization</button>
+            <button onclick="filterProjects('Analysis')">Analysis</button>
+            <button onclick="filterProjects('Learning')">Machine Learning</button>
+        </div>
+    </h2>
+      
+      
+        <div class="media-container" data-categories="Visualization Analysis Learning">
+    <div class="title-ribbon">
+        <h3>Visualization Police Violence in Louisiana</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Visualizing Police Violence in Louisiana dashboard, launched in January 2024, consolidates data on misconduct, police killings, and personnel into a single, easy-to-access platform. The goal of this project is to enhance data accessibility, stewardship, and hold law enforcement agencies in Louisiana to account.</p>
+            <div class="tags">
+        <span class="tag">Visualization</span>
+        <span class="tag">Analysis</span>
+        <span class="tag">Machine Learning</span>
+    </div>
+            <div class="buttons">
+                <a href="https://aclujusticelab.org/dashboard/" target="_blank"><i class="fa fa-project-diagram"></i> Project</a>
+                <a href="https://github.com/aclu-national/JL_dashboard" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="vpvl.jpeg" alt="Project Image" class="project-image">
+        </div>
+    </div>
+</div>
+
+
+<div class="media-container" data-categories="Visualization Analysis">
+    <div class="title-ribbon">
+        <h3>Key Statistics Visualization for Justice Lab Cases</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Key Statistics dashboard for Justice Lab was launched to offer the public and attorneys an accessible, digestible graphic showcasing the remarkable work of the Justice Lab initiative.</p>
+             <div class="tags">
+        <span class="tag">Visualization</span>
+        <span class="tag">Analysis</span>
+    </div>
+            <div class="buttons">
+                <a href="https://aclujusticelab.org/key-statistics/" target="_blank"><i class="fa fa-project-diagram"></i> Project</a>
+                <a href="https://github.com/aclu-national/JL_cases" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="jlc.jpeg" alt="Project Image" class="project-image">
+        </div>
+    </div>
+</div>
+
+
+<!-- Juvenile Crime In Louisiana, by the Numbers (OJJ Analysis) -->
+<div class="media-container" data-categories="Visualization Analysis">
+    <div class="title-ribbon">
+        <h3>Juvenile Crime In Louisiana, by the Numbers</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Juvenile Crime In Louisiana, by the Numbers one-pager features a novel analysis of two leading arrest datasets UCR and NIBRS, revealing that youth crime is decreasing in Louisiana despite prevailing narratives.
+</p>
+ <div class="tags">
+        <span class="tag">Visualization</span>
+        <span class="tag">Analysis</span>
+    </div>
+            <div class="buttons">
+                <a href="https://infogram.com/one-pager-1hmr6g8d8wopz2n" target="_blank"><i class="fa fa-project-diagram"></i> Project</a>
+                <a href="https://github.com/aclu-national/crime_in_louisiana" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="juv.jpeg" alt="Juvenile Crime Analysis" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- Washington 2 Lawsuit -->
+<div class="media-container" data-categories="Analysis Learning Scraping">
+    <div class="title-ribbon">
+        <h3>Washington et al. V. Smith et al.</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Washington et al. V. Smith et al. data analysis aims to demonstrate that the St. Tammany Parish Sheriff’s Office discriminates against African Americans through their traffic stops. This research includes a large-scale predictive analysis of the demographics of those stopped and optical character recognition of citation PDFs. Specifically, from January through November 2023, I found that Black individuals in St. Tammany Parish were 250% more likely to be stopped for alleged traffic violations than white individuals.</p>
+             <div class="tags">
+        <span class="tag">Analysis</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Scraping</span>
+    </div>
+            <div class="buttons">
+                <a href="https://aclujusticelab.org/wp-content/uploads/2024/02/02.05.24-Wash-II-Amended-Complaint.pdf" target="_blank"><i class="fa fa-project-diagram"></i> Project</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="wash2.jpeg" alt="Washington 2 Lawsuit" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- Unsupervised Text Clustering -->
+<div class="media-container" data-categories="Learning">
+    <div class="title-ribbon">
+        <h3>Clustering and Classifying Misconduct Allegations in Louisiana</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Clustering and Classifying Misconduct Allegations in Louisiana analysis was used to solve the NLP problem of categorizing police misconduct. Specifically, I developed an algorithm to cluster misconduct allegations using TF-IDF, MiniLM, DistilBERT embeddings and HDBSCAN clustering, and to multi-classify them with Support Vector Classification. This approach effectively organizes and analyzes large sets of textual misconduct allegations, making them actionable data points.</p>
+            <div class="tags">
+        <span class="tag">Machine Learning</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/aclu-national/la_misconduct_clustering_classification" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="cluster.jpeg" alt="Unsupervised Text Clustering" class="project-image">
+        </div>
+        
+    </div>
+    
+</div>
+
+<!-- The Advocate Analysis -->
+<div class="media-container" data-categories="Analysis Scraping">
+    <div class="title-ribbon">
+        <h3>The Advocate Media Analysis</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Advocate Media Analysis examines how media coverage may influence perceptions of crime in Louisiana. I analyzed every article from The Advocate from 2016 and found that out of 102,029 news articles, 27,799 (27%) were in the "police and crime" media category.</p>
+             <div class="tags">
+        <span class="tag">Analysis</span>
+        <span class="tag">Scraping</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/aclu-national/advocate_scraper" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="advocate.jpeg" alt="The Advocate Analysis" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- Predicting Bill Party Sponsorship in New York State Congress -->
+<div class="media-container" data-categories="Analysis Scraping Learning">
+    <div class="title-ribbon">
+        <h3>Predicting Bill Party Sponsorship in New York State Congress</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">Used an RNN on the title and summary of a bill in New York State Congress to predict whether or not the sponsor is Republican or Democrat. Many report that the legislature in New York is becoming increasingly conservative. Our model allows us to predict on a scale between 0 and 1 how conservative a bill is based on its semantics. </p>
+             <div class="tags">
+        <span class="tag">Machine Learning</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/appelson/bill_prediction/blob/main/Final-Project.pdf" target="_blank"><i class="fa fa-diagram"></i> Project</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="rep.png" alt="Bill Sponsorship" class="project-image">
+        </div>
+    </div>
+</div>
+
+          
+
+<!-- Weather Analysis -->
+<div class="media-container" data-categories="Scraping">
+    <div class="title-ribbon">
+        <h3>Hourly Weather Extraction</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">Inspired by the methodology of the  Weather Impact on Racial Composition and Citation Activity of Traffic Stops in the United States, the Weather Data extractor provides code to download hourly historical weather information from NASA's Earth Observing System Data and Information System for any specified bounding box within the United States. The data includes precipitation rates, temperature, wind speed, and direction.</p>
+             <div class="tags">
+        <span class="tag">Scraping</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/appelson/hourly_weather" target="_blank"><i class="fa fa-project-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="weather.png" alt="Weather Analysis" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- Statute of Limitation Analysis -->
+<div class="media-container" data-categories="Visualization Analysis Scraping">
+    <div class="title-ribbon">
+        <h3>One vs. Two-year Statute of Limitation Impact Factsheet</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The One vs. Two-year Statute of Limitation Impact Factsheet analysis uses data scraped from Lex Machina to challenges the claim that shorter statutes of limitations lead to more meritorious cases. Our analysis suggests that extending the statute of limitations for police action cases in Louisiana could reduce court caseloads and result in more meritorious cases. </p>
+             <div class="tags">
+        <span class="tag">Visualization</span>
+        <span class="tag">Analysis</span>
+        <span class="tag">Scraping</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/aclu-national/lousiaina_sol_analysis?tab=readme-ov-file" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="sol2.jpeg" alt="Statute of Limitation Analysis" class="project-image">
+        </div>
+    </div>
+</div>
+
+<div class="media-container" data-categories="Visualization Analysis Learning">
+    <div class="title-ribbon">
+        <h3>Police Department Quick Facts</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Louisiana Police Quick Facts website provides key information on policing quickly and effectively. This project aims to make essential policing facts accessible to the public. This tool is not yet public.</p>
+             <div class="tags">
+        <span class="tag">Visualization</span>
+        <span class="tag">Analysis</span>
+        <span class="tag">Machine Learning</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/aclu-national/police_quick_facts" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="quick.jpeg" alt="Police Department Quick Facts" class="project-image">
+        </div>
+    </div>
+</div>        
+
+<!-- Testimony Generator -->
+<div class="media-container" data-categories="Visualization">
+    <div class="title-ribbon">
+        <h3>Testimony Generator</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">Built a website that generates personalized testimonies based on user input about a bill and their connection to it. This tool helps individuals quickly create effective and tailored testimonies. This tool is not yet public.</p>
+            <div class="tags">
+        <span class="tag">Visualization</span>
+    </div>
+            <div class="buttons">
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="testimony.jpeg" alt="Testimony Generator" class="project-image">
+        </div>
+    </div>
+</div>
+          
+<!-- Misdirection LLM -->
+<div class="media-container" data-categories="Learning">
+    <div class="title-ribbon">
+        <h3>Misdirection Model</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The predicting LLM misdirection algorithm was created for the inaugural Humane Intelligence Algorithmic Bias Bounty hackathon. This predictive model is a fine-tuned version of distilbert-base-uncased model on a dataset of LLM misdirections.</p>
+            <div class="tags">
+        <span class="tag">Machine Learning</span>
+    </div>
+            <div class="buttons">
+                <a href="https://huggingface.co/Eappelson/predicting_misdirection" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="misdirection.png" alt="misdirection" class="project-image">
+        </div>
+    </div>
+</div>
+          
+          
+<!-- Law Enforcement Agency Locator -->
+<div class="media-container" data-categories="Analysis Scraping">
+    <div class="title-ribbon">
+        <h3>Law Enforcement Agency Locator</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The Law Enforcement Agency Locator analysis uses the Google Maps API to determine the latitude and longitude of all law enforcement agencies in Louisiana. This tool addresses discrepancies in previous mappings of law enforcement agency locations in the state.</p>
+            <div class="tags">
+        <span class="tag">Analysis</span>
+        <span class="tag">Scraping</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/aclu-national/lea_locator/blob/main/lea_location/locator.R" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="location.jpeg" alt="Law Enforcement Agency Locator" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- How Many Within Function -->
+<div class="media-container" data-categories="Analysis">
+    <div class="title-ribbon">
+        <h3>How Many Within Function</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">Created as a supplement to the “How Many Xs Are Within Y Meters of at Least One Z?” blog post, the How Many Within code uses OpenStreetMap data to count the number of amenities within a set distance from each other. This function is useful for spatial analysis in urban planning and public services.</p>
+            <div class="tags">
+        <span class="tag">Analysis</span>
+        
+    </div>
+            <div class="buttons">
+                <a href="https://medium.com/@eappelson/how-many-xs-are-within-y-meters-of-at-least-one-z-110331bb235f" target="_blank"><i class="fa fa-project-diagram"></i> Project</a>
+                <a href="https://github.com/appelson/how_many_within" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="location2.jpeg" alt="How Many Within Function" class="project-image">
+        </div>
+    </div>
+</div>
+
+
+<!-- Pebbling -->
+<div class="media-container" data-categories="visualization">
+    <div class="title-ribbon">
+        <h3>Pebbling a Chessboard Game</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">Inspired by the fascinating mathematics problem of pebbling a chessboard, this simple Java video game takes the task to a new level providing an entire board and asking the player to escape the red bounding box.</p>
+            <div class="tags">
+        <span class="tag">Visualization</span>
+        
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/appelson/annoying-checkers" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="pebbling.png" alt="Pebbling" class="project-image">
+        </div>
+    </div>
+</div>
+
+<!-- MBMBAM Transcript Analysis -->
+<div class="media-container" data-categories="Scraping Analysis">
+    <div class="title-ribbon">
+        <h3>MBMBAM Transcript Analysis</h3>
+    </div>
+    <div class="content">
+        <div class="project-description">
+            <p class="description">The MBMBAM Transcript Analysis provides code to scrape, clean, and analyze transcripts from the podcast "My Brother, My Brother, and Me." This NLP task allows us to gain critical insights about the semantic relationships between the three hosts. </p>
+            <div class="tags">
+        <span class="tag">Scraping</span>
+        <span class="tag">Analysis</span>
+    </div>
+            <div class="buttons">
+                <a href="https://github.com/appelson/MBMBAM-Transcript-Analysis" target="_blank"><i class="fa fa-code"></i> Code</a>
+            </div>
+        </div>
+        <div class="image-frame">
+            <img src="mbmbam.jpeg" alt="MBMBAM Transcript Analysis" class="project-image">
+        </div>
+    </div>
+</div>
+</div>
+
+
+    </main>
+    <footer>
+        <a href="https://www.linkedin.com/in/elijahappelson" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/appelson" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:elijahappelson@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </footer>
+    <script>
+        const targetText = "Projects";
+        const output = document.getElementById('header-effect');
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/";
+        let index = 0;
+        const delay = 100; // Adjust this value to slow down the effect
+
+        function getRandomChar() {
+            return chars[Math.floor(Math.random() * chars.length)];
+        }
+        
+        function filterProjects(category) {
+    // Remove the 'selected' class from all buttons
+    document.querySelectorAll('.filter-buttons button').forEach(button => {
+        button.classList.remove('selected');
+    });
+
+    // Add the 'selected' class to the clicked button
+    const button = document.querySelector(`.filter-buttons button[onclick="filterProjects('${category}')"]`);
+    if (button) {
+        button.classList.add('selected');
+    }
+
+    // Your existing filtering logic
+    const mediaContainers = document.querySelectorAll('.media-container');
+    mediaContainers.forEach(container => {
+        const categories = container.getAttribute('data-categories').split(' ');
+        if (category === '' || categories.includes(category)) {
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+        }
+    });
+}
+
+        function updateHeader() {
+            let randomText = "";
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < index) {
+                    randomText += targetText[i];
+                } else {
+                    randomText += getRandomChar();
+                }
+            }
+            output.textContent = randomText;
+
+            if (index < targetText.length) {
+                index++;
+                setTimeout(updateHeader, delay);
+            }
+        }
+
+        updateHeader();
+    </script>
+    <script src="script2.js"></script>
+</body>
+</html>

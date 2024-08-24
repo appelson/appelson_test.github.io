@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Appelson's Custom Site</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #networkGraph {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .resume-container {
+            max-width: 900px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <svg id="networkGraph"></svg>
+    <header>
+        <div id="header-effect">Media</div>
+    </header>
+        <img src="eha.jpeg" alt="Elijah Appelson" class="profile-image">
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="resume-container">
+            <h2 class="section-bar">Quotes</h2>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>From Pure Mathematics to the ACLU of Louisiana: Elijah Appelson’s Journey with Bluebonnet Data <span class="news-agency">by BlueBonnet Data</span></h3>
+                <p>An interview on my work with the ACLU of Louisiana and my journey to joining the position.</p>
+                <a href="https://www.bluebonnetdata.org/post/from-pure-mathematics-to-the-aclu-of-louisiana-elijah-appelson-s-journey-with-bluebonnet-data/">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>New ACLU dashboard turns spotlight on law enforcement killings in Louisiana <span class="news-agency">by Fox 8 Live</span></h3>
+                <p>A TV interview regarding the launch of the ACLU of Louisiana Visualizing Police Violence in Louisiana Dashboard. This initial interview was picked up by a multitude of news agencies across Louisiana including the state chapters of ABC, CBS, and others, along with a follow-up radio interview with the Louisiana Radio Network.</p>
+                <a href="https://www.fox8live.com/video/2024/01/30/new-aclu-dashboard-turns-spotlight-law-enforcement-killings-louisiana/">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>Home cameras are becoming a top tool to solve Baton Rouge-area crimes. Here's how.<span class="news-agency">by The Advocate</span></h3>
+                <p>An interview with The Advocate on the potential civil liberty abuse of using home security cameras for surveillance.</p>
+                <a href="https://www.theadvocate.com/baton_rouge/news/crime_police/ascension-pitches-voluntary-registry-of-surveillance-cameras/article_817f6350-e84f-11ee-9a75-4f65f819f830.html">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>Public provides feedback on Poughkeepsie City PD reform plan<span class="news-agency">by Mid-Hudson News</span></h3>
+                <p>One of several interviews in 2021 on the police reform plan proposed in Poughkeepsie.</p>
+                <a href="https://midhudsonnews.com/2021/02/11/public-provides-feedback-on-poughkeepsie-city-pd-reform-plan/">Read More</a>
+            </div>
+            <h2 class="section-bar">Research and Visualizations</h2>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>It’s our right to observe the police. These states have decided otherwise.<span class="news-agency">by MSNBC</span></h3>
+                <p>Created figures on the number and regularity of police killings in Louisiana, along with the rate of stops in St. Tammany Parish.</p>
+                <a href="https://www.msnbc.com/opinion/msnbc-opinion/louisiana-police-recording-bill-trend-rcna148894">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>A Selective Bibliography of Forced Migration: Resources for A New Generation of Discourse.<span class="news-agency">by Europe Now Journal</span></h3>
+                <p>Co-created a Bibliography on information related to forced migration. Specifically, my entry was on viewing the prison system as a method of forced migration.</p>
+                <a href="https://www.europenowjournal.org/2020/10/11/a-selective-bibliography-of-forced-migration-resources-for-a-new-generation-of-discourse/">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>Tough on Crime Made Louisiana Less Safe—And Cost Taxpayers Way More Money.<span class="news-agency">by Newsweek</span></h3>
+                <p>Created figures and visualizations on recidivism rates in Louisiana.</p>
+                <a href="https://www.newsweek.com/tough-crime-made-louisiana-less-safe-cost-taxpayers-way-more-money-opinion-1876698">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>You have one year to sue a cop for abuse. Civil rights firms want to change that.<span class="news-agency">by Verite News</span></h3>
+                <p>Created figures on the number of misconduct allegations submitted to the ACLU of Louisiana that fell out of the one-year statute of limitation period.</p>
+                <a href="https://veritenews.org/2023/10/11/civil-rights-firms-challenge-one-year-deadline-to-sue-police/">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label">Source: </span>Mathematics for Prison Abolition syllabus.<span class="news-agency">by Just Math Collective</span></h3>
+                <p>Created a comprehensive syllabus on critiquing and using mathematics for prison abolition.</p>
+                <a href="https://www.justmathematicscollective.net/resources.html">Read More</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <a href="https://www.linkedin.com/in/your-linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/your-github" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:your-email@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </footer>
+    <script>
+        const targetText = "Media";
+        const output = document.getElementById('header-effect');
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/";
+        let index = 0;
+        const delay = 100; // Adjust this value to slow down the effect
+
+        function getRandomChar() {
+            return chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        function updateHeader() {
+            let randomText = "";
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < index) {
+                    randomText += targetText[i];
+                } else {
+                    randomText += getRandomChar();
+                }
+            }
+            output.textContent = randomText;
+
+            if (index < targetText.length) {
+                index++;
+                setTimeout(updateHeader, delay);
+            }
+        }
+
+        updateHeader();
+    </script>
+    <script src="script2.js"></script>
+</body>
+</html>

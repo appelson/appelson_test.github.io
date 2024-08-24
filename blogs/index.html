@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing - Appelson's Custom Site</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #networkGraph {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .resume-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+    </style>
+</head>
+<body>
+    <svg id="networkGraph"></svg>
+    <header>
+        <div id="header-effect">Writing</div>
+    </header>
+    <img src="eha.jpeg" alt="Elijah Appelson" class="profile-image">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="media.html">Media</a></li>
+            <li><a href="blogs.html">Blogs</a></li>
+            <li><a href="resume.html">Resume</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="resume-container">
+            <h2 class="section-bar">Blogs</h2>
+            <div class="media-container">
+                <h3><span class="source-label"></span>Classifying Police Misconduct: One-Shot GPT vs. Support Vector Classifier</h3>
+                <p>Analyze the failings of using Large Language Models for classifying police misconduct allegations in Louisiana.</p>
+                <a href="https://medium.com/@eappelson/classifying-police-misconduct-one-shot-gpt-vs-support-vector-classifier-d2d4df58dcee">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label"></span>An Introduction to the Mathematics of Hashing</h3>
+                <p>Explore the fundamentals of hashing mathematics and how it applies to various fields, including data security and algorithm design.</p>
+                <a href="https://medium.com/@eappelson/an-introduction-to-the-mathematics-of-hashing-b42ad2130a11">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label"></span>How Many Xs Are Within Y Meters of at Least One Z?</h3>
+                <p>Dive into spatial queries and the mathematical techniques used to determine the proximity of objects within a given distance.</p>
+                <a href="https://medium.com/@eappelson/how-many-xs-are-within-y-meters-of-at-least-one-z-110331bb235f">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label"></span>Unveiling Spatial Demographics Using Bounding Boxes and Census Tracts in R</h3>
+                <p>Learn how to use R for spatial analysis with bounding boxes and census tracts to reveal demographic patterns and insights.</p>
+                <a href="https://medium.com/@eappelson/unveiling-spatial-demographics-using-bounding-boxes-and-census-tracts-in-r-2d5ce08698b4">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label"></span>Navigating the Complexity of Classifying Police Misconduct Allegations in Louisiana</h3>
+                <p>Understand the challenges and methodologies involved in classifying police misconduct allegations and their implications for justice.</p>
+                <a href="https://medium.com/@eappelson/navigating-the-complexity-of-classifying-police-misconduct-allegations-in-louisiana-0dd107ca7531">Read More</a>
+            </div>
+            <div class="media-container">
+                <h3><span class="source-label"></span>Skills for a Professional Data Activist</h3>
+                <p>Discover the essential skills and strategies for becoming a data activist, including techniques for leveraging data to drive social change.</p>
+                <a href="https://medium.com/@eappelson/skills-for-a-professional-data-activist-61224dc950e0">Read More</a>
+            </div>
+        </div>
+    </main>
+   <footer>
+        <a href="https://www.linkedin.com/in/elijahappelson" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/appelson" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:elijahappelson@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </footer>
+    <script>
+        const targetText = "Blogs";
+        const output = document.getElementById('header-effect');
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/";
+        let index = 0;
+        const delay = 100; // Adjust this value to slow down the effect
+
+        function getRandomChar() {
+            return chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        function updateHeader() {
+            let randomText = "";
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < index) {
+                    randomText += targetText[i];
+                } else {
+                    randomText += getRandomChar();
+                }
+            }
+            output.textContent = randomText;
+
+            if (index < targetText.length) {
+                index++;
+                setTimeout(updateHeader, delay);
+            }
+        }
+
+        updateHeader();
+    </script>
+    <script src="script2.js"></script>
+</body>
+</html>
